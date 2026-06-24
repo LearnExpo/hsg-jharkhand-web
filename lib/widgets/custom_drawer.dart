@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hsg_fronend/core/services/scroll_service.dart';
 import '../core/theme/app_color.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -35,25 +36,56 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ],
             ),
-            _drawerItem(context, "Home", "/"),
-            _drawerItem(context, "About", "/about"),
-            _drawerItem(context, "Gallery", "/gallery"),
-            _drawerItem(context, "Contact", "/contact"),
+            _drawerItem(
+              context,
+              "About",
+              () => ScrollService.scrollTo(ScrollService.aboutKey),
+            ),
+
+            _drawerItem(
+              context,
+              "Activities",
+              () => ScrollService.scrollTo(ScrollService.activitiesKey),
+            ),
+
+            _drawerItem(
+              context,
+              "Leadership",
+              () => ScrollService.scrollTo(ScrollService.leadershipKey),
+            ),
+
+            _drawerItem(
+              context,
+              "Districts",
+              () => ScrollService.scrollTo(ScrollService.districtsKey),
+            ),
+
+            _drawerItem(
+              context,
+              "Gallery",
+              () => ScrollService.scrollTo(ScrollService.galleryKey),
+            ),
+
+            _drawerItem(
+              context,
+              "Notices",
+              () => ScrollService.scrollTo(ScrollService.noticesKey),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _drawerItem(BuildContext context, String title, String route) {
+  Widget _drawerItem(BuildContext context, String title, VoidCallback onTap) {
     return ListTile(
       title: Text(
         title,
         style: const TextStyle(color: Colors.white, fontSize: 18),
       ),
       onTap: () {
-        context.go(route);
-        Navigator.pop(context); // Close the drawer after navigation
+        Navigator.pop(context);
+        onTap();
       },
     );
   }

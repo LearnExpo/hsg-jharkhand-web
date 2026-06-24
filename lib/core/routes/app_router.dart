@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hsg_fronend/core/services/scroll_service.dart';
 import 'package:hsg_fronend/pages/about_page.dart';
 import 'package:hsg_fronend/pages/contact_page.dart';
 import 'package:hsg_fronend/pages/gallery_page.dart';
@@ -14,13 +15,17 @@ final GoRouter appRouter = GoRouter(
   routes: [
     ShellRoute(
       builder: (context, state, child) {
-          bool isMobile = ResponsiveBreakpoints.of(context).smallerThan(DESKTOP);
+        bool isMobile = ResponsiveBreakpoints.of(context).smallerThan(DESKTOP);
         return Scaffold(
           appBar: const CustomNavBar(),
-          drawer:isMobile? const CustomDrawer():null,
-        
-          body: child, // Your pages (Home, About, etc.) will be injected here
-          bottomNavigationBar: const Footer(),
+          drawer: isMobile ? const CustomDrawer() : null,
+
+          body: child,
+          //  SingleChildScrollView(
+          //   controller: ScrollService.scrollController,
+          //   child: child,
+          // ), // Your pages (Home, About, etc.) will be injected here
+          // bottomNavigationBar: const Footer(),
         );
       },
       routes: [
